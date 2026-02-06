@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="img/DLDN_LOGO.png" />
+    <title>Admin Login - Dai Luc Dong Nai</title>
+    <link rel="stylesheet" href="css/styleAdminLogin.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-left">
+        <h2>Welcome Back!</h2>
+        <p>
+          Manage your website content, upload images, and view customer feedback
+          all in one place. Sign in to access the admin dashboard.
+        </p>
+      </div>
+
+      <div class="login-right">
+        <div class="login-header">
+          <h1>Admin Login</h1>
+          <p>Dai Luc Dong Nai Management</p>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+          Invalid username or password!
+        </div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-input"
+              id="username"
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-input"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <div class="form-checkbox">
+            <input type="checkbox" id="remember" />
+            <label for="remember">Remember me</label>
+          </div>
+
+          <button type="submit" class="login-btn">Sign In</button>
+        </form>
+
+        <div class="login-footer">
+          <a href="#">Forgot password?</a>
+        </div>
+      </div>
+    </div>
+    <script src="js/adminLogin.js"></script>
+  </body>
+</html>

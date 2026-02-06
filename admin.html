@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Dai Luc Dong Nai</title>
+    <link rel="stylesheet" href="css/styleAdmin.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>ADMIN</h2>
+        <p>Dai Luc Dong Nai</p>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li>
+          <a href="#" class="active" data-page="dashboard">
+            <span class="menu-icon">📊</span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-page="carousel">
+            <span class="menu-icon">🖼️</span>
+            <span>Carousel Images</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-page="clients">
+            <span class="menu-icon">🏢</span>
+            <span>Clients Images</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-page="production">
+            <span class="menu-icon">🏭</span>
+            <span>Production Images</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-page="feedback">
+            <span class="menu-icon">💬</span>
+            <span>User Feedback</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <h1 id="pageTitle">Dashboard</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+
+      <!-- Dashboard Page -->
+      <div id="dashboardPage" class="page-content">
+        <div class="stats-grid">
+          <div class="stat-card blue">
+            <div class="stat-label">Total Carousel Images</div>
+            <div class="stat-value" id="statCarousel">5</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-label">Client Brands</div>
+            <div class="stat-value" id="statClients">15</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Production Lines</div>
+            <div class="stat-value">8</div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h3>Recent Activity</h3>
+          <p style="color: #94a3b8; text-align: center; padding: 40px">
+            Welcome to Admin Dashboard! Select a menu item to manage content.
+          </p>
+        </div>
+      </div>
+
+      <!-- Carousel Page -->
+      <div id="carouselPage" class="page-content" style="display: none">
+        <div class="section-card">
+          <h3>Upload Carousel Images</h3>
+          <div class="upload-area" id="carouselUpload">
+            <div class="upload-icon">📤</div>
+            <div class="upload-text">Click or drag images here</div>
+            <div class="upload-hint">
+              Recommended: 950x470px, PNG/JPG, max 5MB
+            </div>
+            <input type="file" id="carouselInput" accept="image/*" multiple />
+          </div>
+
+          <div class="image-grid" id="carouselGrid">
+            <!-- Images will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Clients Page -->
+      <div id="clientsPage" class="page-content" style="display: none">
+        <div class="section-card">
+          <h3>Manage Client Images</h3>
+
+          <div class="tabs">
+            <button class="tab-btn active" data-client="PUMA">PUMA</button>
+            <button class="tab-btn" data-client="ZARA">ZARA</button>
+            <button class="tab-btn" data-client="BATA">BATA</button>
+            <button class="tab-btn" data-client="SHOEX">SHOEX</button>
+            <button class="tab-btn" data-client="SHOEX">SHOEX</button>
+          </div>
+
+          <div class="upload-area" id="clientsUpload">
+            <div class="upload-icon">📤</div>
+            <div class="upload-text">
+              Upload images for <span id="currentClient">PUMA</span>
+            </div>
+            <div class="upload-hint">Upload 4 corner images</div>
+            <input type="file" id="clientsInput" accept="image/*" multiple />
+          </div>
+
+          <div class="image-grid" id="clientsGrid">
+            <!-- Images will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Production Page -->
+      <div id="productionPage" class="page-content" style="display: none">
+        <div class="section-card">
+          <h3>Production Line Images</h3>
+
+          <div class="tabs">
+            <button class="tab-btn active" data-line="cutting">Cutting</button>
+            <button class="tab-btn" data-line="stitching">Stitching</button>
+            <button class="tab-btn" data-line="assembly">Assembly</button>
+            <button class="tab-btn" data-line="warehouse">Warehouse</button>
+          </div>
+
+          <div class="upload-area" id="productionUpload">
+            <div class="upload-icon">📤</div>
+            <div class="upload-text">
+              Upload <span id="currentLine">Cutting</span> Line Images
+            </div>
+            <input type="file" id="productionInput" accept="image/*" multiple />
+          </div>
+
+          <div class="image-grid" id="productionGrid">
+            <!-- Images will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback Page -->
+      <div id="feedbackPage" class="page-content" style="display: none">
+        <div class="container">
+          <div class="stats">
+            <div class="stat-card">
+              <div class="stat-value" id="totalCount">0</div>
+              <div class="stat-label">Total Feedback</div>
+            </div>
+            <div
+              class="stat-card"
+              style="
+                background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+              "
+            >
+              <div class="stat-value" id="newCount">0</div>
+              <div class="stat-label">New Feedback</div>
+            </div>
+            <div
+              class="stat-card"
+              style="
+                background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+              "
+            >
+              <div class="stat-value" id="readCount">0</div>
+              <div class="stat-label">Read Feedback</div>
+            </div>
+          </div>
+
+          <table class="feedback-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="feedbackBody">
+              <tr>
+                <td colspan="6" class="empty-state">
+                  No feedback yet. Submit from your website to see it here!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- Feedback Detail Modal -->
+    <div class="modal" id="feedbackModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Feedback Details</h3>
+          <button class="modal-close" onclick="closeFeedbackModal()">✕</button>
+        </div>
+        <div class="feedback-detail" id="feedbackDetail">
+          <!-- Details will be loaded here -->
+        </div>
+      </div>
+    </div>
+    <script>
+      if (localStorage.getItem("adminLoggedIn") !== "true") {
+        window.location.href = "admin.html";
+      }
+    </script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
